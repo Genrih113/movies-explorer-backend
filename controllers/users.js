@@ -11,6 +11,7 @@ const {
   mailBeenUsedErrorMessage,
   incorrectEmailOrPasswordErrorMessage,
   userCreatedMessage,
+  mongoUniqueFieldDuplicatedErrorCode,
 } = require('../utils/constants');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -35,7 +36,12 @@ const updateUserInfo = (req, res, next) => {
   User.findByIdAndUpdate(profileId, { name, email }, { new: true, runValidators: true })
     .orFail(() => { throw new NotFoundError(notFoundErrorMessage); })
     .then((user) => res.send(user))
-    .catch((err) => next(err));
+    .catch((err) => {
+      if (err.code === mongoUniqueFieldDuplicatedErrorCode) {
+        return next(new ConflictError(mailBeenUsedErrorMessage));
+      }
+      return next(err);
+    });
 };
 
 const signup = (req, res, next) => {
@@ -46,7 +52,7 @@ const signup = (req, res, next) => {
       User.create({ email, name, password: hash })
         .then(() => res.send({ message: userCreatedMessage }))
         .catch((err) => {
-          if (err.code === 11000) {
+          if (err.code === mongoUniqueFieldDuplicatedErrorCode) {
             return next(new ConflictError(mailBeenUsedErrorMessage));
           }
           return next(err);

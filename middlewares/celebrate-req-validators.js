@@ -9,6 +9,7 @@ const validateSignupUserReqBody = celebrate({
         .min(2)
         .max(30)
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не введено имя',
           'string.min': 'имя должно быть длинной от 2 до 30 символов',
           'string.max': 'имя должно быть длинной от 2 до 30 символов',
@@ -19,6 +20,7 @@ const validateSignupUserReqBody = celebrate({
         .required()
         .email()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не указан адрес почты',
           'string.email': 'не корректный адрес почты',
         }),
@@ -28,6 +30,7 @@ const validateSignupUserReqBody = celebrate({
         .required()
         .min(4)
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не введен пароль',
           'string.min': 'пароль должен состоять из не менее чем 4 символов',
         }),
@@ -42,6 +45,7 @@ const validateSigninUserReqBody = celebrate({
         .required()
         .email()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не указан адрес почты',
           'string.email': 'не корректный адрес почты',
         }),
@@ -51,6 +55,7 @@ const validateSigninUserReqBody = celebrate({
         .required()
         .min(4)
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не введен пароль',
           'string.min': 'пароль должен состоять из не менее чем 4 символов',
         }),
@@ -66,6 +71,7 @@ const validateUpdateUserReqBody = celebrate({
         .min(2)
         .max(30)
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не введено имя',
           'string.min': 'имя должно быть длинной от 2 до 30 символов',
           'string.max': 'имя должно быть длинной от 2 до 30 символов',
@@ -76,6 +82,7 @@ const validateUpdateUserReqBody = celebrate({
         .required()
         .email()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не указан адрес почты',
           'string.email': 'не корректный адрес почты',
         }),
@@ -89,6 +96,7 @@ const validateCreateMovieNoteReqBody = celebrate({
         .string()
         .required()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "страна"',
         }),
     director:
@@ -96,6 +104,7 @@ const validateCreateMovieNoteReqBody = celebrate({
         .string()
         .required()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "режиссер"',
         }),
     duration:
@@ -103,6 +112,7 @@ const validateCreateMovieNoteReqBody = celebrate({
         .number()
         .required()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "длительность"',
         }),
     year:
@@ -110,6 +120,7 @@ const validateCreateMovieNoteReqBody = celebrate({
         .string()
         .required()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "год выпуска"',
         }),
     description:
@@ -117,6 +128,7 @@ const validateCreateMovieNoteReqBody = celebrate({
         .string()
         .required()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "описание"',
         }),
     image:
@@ -125,6 +137,7 @@ const validateCreateMovieNoteReqBody = celebrate({
         .required()
         .pattern(/^https?:\/\/[a-zA-Z0-9-]{2,64}\.[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=]{2,}/)
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "постер"',
           'string.pattern.base': 'не корректная ссылка',
         }),
@@ -134,6 +147,7 @@ const validateCreateMovieNoteReqBody = celebrate({
         .required()
         .pattern(/^https?:\/\/[a-zA-Z0-9-]{2,64}\.[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=]{2,}/)
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "трейлер"',
           'string.pattern.base': 'не корректная ссылка',
         }),
@@ -143,15 +157,16 @@ const validateCreateMovieNoteReqBody = celebrate({
         .required()
         .pattern(/^https?:\/\/[a-zA-Z0-9-]{2,64}\.[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=]{2,}/)
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "мини-постер"',
           'string.pattern.base': 'не корректная ссылка',
         }),
-    // owner,
     movieId:
       Joi
         .string()
         .required()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "Id фильма"',
         }),
     nameRU:
@@ -159,6 +174,7 @@ const validateCreateMovieNoteReqBody = celebrate({
         .string()
         .required()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "Название (рус.)"',
         }),
     nameEN:
@@ -166,6 +182,7 @@ const validateCreateMovieNoteReqBody = celebrate({
         .string()
         .required()
         .messages({
+          'any.required': 'пропущено обязательное поле {#label}',
           'string.empty': 'не заполнено поле "Название (англ.)"',
         }),
   }).unknown(true),

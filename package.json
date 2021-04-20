@@ -4,7 +4,6 @@
   "description": "movies-explorer project backend",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "PORT=3000 nodemon app.js",
     "start": "PORT=3000 node app.js"
   },

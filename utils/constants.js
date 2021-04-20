@@ -21,6 +21,6 @@ module.exports = {
   movieDeletedMessage: 'Запись о фильме удалена',
   permissionDeniedErrorMessage: 'Недостаточно прав',
 
-  mongoUniqueFieldDuplicatedError: 11000,
+  mongoUniqueFieldDuplicatedErrorCode: 11000,
   mongoIdIncorrectErrorCode: 'ObjectId',
 };

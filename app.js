@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-// const { errors } = require('celebrate');
 
 const usersRouter = require('./routes/users');
 const moviesRouter = require('./routes/movies');
@@ -45,7 +44,6 @@ app.use(auth);
 app.use('/users', usersRouter);
 app.use('/movies', moviesRouter);
 app.use('*', () => {
-  // page not found logic
   throw new NotFoundError(notFoundErrorMessage);
 });
 
