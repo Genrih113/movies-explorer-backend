@@ -32,6 +32,7 @@ mongoose.connect(mongoDBURI, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
+  useUnifiedTopology: true,
 });
 
 app.use(requestLogger);
