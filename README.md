@@ -1,5 +1,5 @@
 # movies-explorer-backend
 ## Бэкенд дипломной работы
 
-Бэкенд доступен по адресу- https://api.genrih113-mesto.nomoredomains.club  
-Публичный IPv4- 84.201.152.191
+Бэкенд доступен по адресу- https://api.tolstov-movie.nomoredomains.monster  
+Публичный IPv4- 178.154.201.249

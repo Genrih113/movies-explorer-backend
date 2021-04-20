@@ -57,6 +57,4 @@ app.use(celebrateErrorHandler);
 // централизованный обработчик ошибок
 app.use(centralizedErrorHandler);
 
-app.listen(PORT, () => {
-  console.log(`сервер запущен на ${PORT} порту!`);
-});
+app.listen(PORT);
