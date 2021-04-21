@@ -1,5 +1,7 @@
 const { Joi, celebrate } = require('celebrate');
 
+const regex = /^https?:\/\/[a-zA-Z0-9-]{2,64}\.[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=]{2,}/;
+
 const validateSignupUserReqBody = celebrate({
   body: Joi.object().keys({
     name:
@@ -8,9 +10,11 @@ const validateSignupUserReqBody = celebrate({
         .required()
         .min(2)
         .max(30)
+        .label('имя')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не введено имя',
+          'string.empty': 'не заполнено поле {#label}',
           'string.min': 'имя должно быть длинной от 2 до 30 символов',
           'string.max': 'имя должно быть длинной от 2 до 30 символов',
         }),
@@ -19,19 +23,22 @@ const validateSignupUserReqBody = celebrate({
         .string()
         .required()
         .email()
+        .label('почта')
         .messages({
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не указан адрес почты',
-          'string.email': 'не корректный адрес почты',
+          'string.empty': 'не заполнено поле {#label}',
+          'string.email': 'не корректное значение в поле {#label}',
         }),
     password:
       Joi
         .string()
         .required()
         .min(4)
+        .label('пароль')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не введен пароль',
+          'string.empty': 'не заполнено поле {#label}',
           'string.min': 'пароль должен состоять из не менее чем 4 символов',
         }),
   }).unknown(true),
@@ -44,19 +51,22 @@ const validateSigninUserReqBody = celebrate({
         .string()
         .required()
         .email()
+        .label('почта')
         .messages({
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не указан адрес почты',
-          'string.email': 'не корректный адрес почты',
+          'string.empty': 'не заполнено поле {#label}',
+          'string.email': 'не корректное значение в поле {#label}',
         }),
     password:
       Joi
         .string()
         .required()
         .min(4)
+        .label('пароль')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не введен пароль',
+          'string.empty': 'не заполнено поле {#label}',
           'string.min': 'пароль должен состоять из не менее чем 4 символов',
         }),
   }).unknown(true),
@@ -70,9 +80,11 @@ const validateUpdateUserReqBody = celebrate({
         .required()
         .min(2)
         .max(30)
+        .label('имя')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не введено имя',
+          'string.empty': 'не заполнено поле {#label}',
           'string.min': 'имя должно быть длинной от 2 до 30 символов',
           'string.max': 'имя должно быть длинной от 2 до 30 символов',
         }),
@@ -81,10 +93,11 @@ const validateUpdateUserReqBody = celebrate({
         .string()
         .required()
         .email()
+        .label('почта')
         .messages({
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не указан адрес почты',
-          'string.email': 'не корректный адрес почты',
+          'string.empty': 'не заполнено поле {#label}',
+          'string.email': 'не корректное значение в поле {#label}',
         }),
   }).unknown(true),
 });
@@ -95,95 +108,115 @@ const validateCreateMovieNoteReqBody = celebrate({
       Joi
         .string()
         .required()
+        .label('страна')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "страна"',
+          'string.empty': 'не заполнено поле {#label}',
         }),
     director:
       Joi
         .string()
         .required()
+        .label('режиссер')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "режиссер"',
+          'string.empty': 'не заполнено поле {#label}',
         }),
     duration:
       Joi
         .number()
         .required()
+        .label('продолжительность')
         .messages({
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "длительность"',
+          'number.base': 'поле {#label} должно содержать число',
         }),
     year:
       Joi
         .string()
         .required()
+        .label('год')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "год выпуска"',
+          'string.empty': 'не заполнено поле {#label}',
         }),
     description:
       Joi
         .string()
         .required()
+        .label('описание')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "описание"',
+          'string.empty': 'не заполнено поле {#label}',
         }),
     image:
       Joi
         .string()
         .required()
-        .pattern(/^https?:\/\/[a-zA-Z0-9-]{2,64}\.[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=]{2,}/)
+        .pattern(regex)
+        .label('постер')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "постер"',
-          'string.pattern.base': 'не корректная ссылка',
+          'string.empty': 'не заполнено поле {#label}',
+          'string.pattern.base': 'не корректная ссылка в поле {#label}',
         }),
     trailer:
       Joi
         .string()
         .required()
-        .pattern(/^https?:\/\/[a-zA-Z0-9-]{2,64}\.[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=]{2,}/)
+        .pattern(regex)
+        .label('трейлер')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "трейлер"',
-          'string.pattern.base': 'не корректная ссылка',
+          'string.empty': 'не заполнено поле {#label}',
+          'string.pattern.base': 'не корректная ссылка в поле {#label}',
         }),
     thumbnail:
       Joi
         .string()
         .required()
-        .pattern(/^https?:\/\/[a-zA-Z0-9-]{2,64}\.[a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=]{2,}/)
+        .pattern(regex)
+        .label('мини-постер')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "мини-постер"',
-          'string.pattern.base': 'не корректная ссылка',
+          'string.empty': 'не заполнено поле {#label}',
+          'string.pattern.base': 'не корректная ссылка в поле {#label}',
         }),
     movieId:
       Joi
-        .string()
+        .number()
         .required()
+        .label('id-фильма')
         .messages({
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "Id фильма"',
+          'number.base': 'поле {#label} должно содержать число',
         }),
     nameRU:
       Joi
         .string()
         .required()
+        .label('название фильма (рус.)')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "Название (рус.)"',
+          'string.empty': 'не заполнено поле {#label}',
         }),
     nameEN:
       Joi
         .string()
         .required()
+        .label('название фильма (англ.)')
         .messages({
+          'string.base': 'поле {#label} должно содержать строку',
           'any.required': 'пропущено обязательное поле {#label}',
-          'string.empty': 'не заполнено поле "Название (англ.)"',
+          'string.empty': 'не заполнено поле {#label}',
         }),
   }).unknown(true),
 });
