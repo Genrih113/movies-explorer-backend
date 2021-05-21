@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 const usersRouter = require('./routes/users');
 const moviesRouter = require('./routes/movies');
@@ -24,6 +25,8 @@ const mongoDBURI = (NODE_ENV === productionEnvKeyWord ? DB_URI : mongoDBDefaultU
 const { PORT = 3000 } = process.env;
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json());
 
